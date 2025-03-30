@@ -2,10 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://daraghmonaghan.com/</loc>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2025-03-30T16:30:15+01:00</lastmod>
   </url><url>
-    <loc>https://daraghmonaghan.com/categories/</loc>
+    <loc>http://localhost:1313/whiskey/</loc>
+    <lastmod>2025-03-30T16:30:15+01:00</lastmod>
   </url><url>
-    <loc>https://daraghmonaghan.com/tags/</loc>
+    <loc>http://localhost:1313/posts/</loc>
+    <lastmod>2025-02-09T11:19:32+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/looking/</loc>
+    <lastmod>2025-02-08T09:03:20-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/looking/looking/</loc>
+    <lastmod>2025-02-08T09:03:20-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/kms_csi/</loc>
+    <lastmod>2024-01-11T09:03:20-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/the_why/</loc>
+    <lastmod>2024-01-11T09:03:20-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/gitops_secrets/</loc>
+    <lastmod>2024-01-06T09:03:20-08:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/about/</loc>
+  </url><url>
+    <loc>http://localhost:1313/categories/</loc>
+  </url><url>
+    <loc>http://localhost:1313/tags/</loc>
   </url>
 </urlset>
