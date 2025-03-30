@@ -1,0 +1,16 @@
++++
+title = 'KMS & CSI'
+date = 2024-01-11T09:03:20-08:00
+type = 'post'
+draft = false
++++
+
+I won't recommend any one particular KMS but for illustrative purposes, will use Fortanix Data Security Manager here as an example I'm familar with, but its safe enough to say this is basic functionality of any key management platform. You can store a variety of forms of sensitive data here and retrieve them using API keys, certs, basic authentication. Fortanix provides a a wide variety of object types, encoding schemes, rotation options and granular access controls.   
+OpenShift supports the use of a CSI Driver - a Kubernetes object that interfaces with EKMS to forward specified credentials as secrets within a cluster. There are different levels of security even within this approach - whether you apply your API key within the CSI Driver object, or store it as its own secret in the cluster and refer to that is up to you. Fortanix also supports a two way communication between the platforms, enabling automatic rotation your API key.
+
+One other advantage to this approach is that your secrets are kept in one off-system location, distinct from your cluster. Consider whether multiple systems, platforms or services are referring to the same credentials, or require communication of the same security certs. Arguably it gives greater scope for portability. If you see yourself migrating a Kubernetes application off SEBShift and onto GCP in the future, would it be easier to do so if its already connecting to an external service?
+
+There can often be a trade-off between features and dependecies on additional services/platforms/tools, all with their own maintenece load and tech-debt. One should carefully consider whether the feature a new tool provides is worth the additional load that it inherently contributes.
+
+### Why Not Both?
+By combining the key management a KMS provides, and  the two methods available to use, we can achieve a high level of obfuscation. Seal your EKMS key in a SealedSecret, setup the CSI driver to retrieve your secrets and mount them appropriately. However, bear in mind that both services have their own key rotation/renewal requirements, the implications of which imply a level of complexity that I am personally not yet comfortable with. 

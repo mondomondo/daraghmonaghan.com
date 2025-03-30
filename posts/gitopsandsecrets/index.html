@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Automation &amp; DevOps">
+    
+    <link rel="shortcut icon" href="http://localhost:1313/favicon.ico">
+    
+    <link rel="stylesheet" href="/css/style.min.css">
+
+    <link rel="canonical" href="http://localhost:1313/posts/gitopsandsecrets/" />
+    <title>GitOps &amp; Secrets</title>
+</head>
+<body><header id="banner">
+    <h2><a href="http://localhost:1313/">Daragh Monaghan</a></h2>
+    <nav>
+        <ul>
+            <li>
+                <a href="https://ie.linkedin.com/in/daraghmonaghan" title="linkedin">linkedin</a>
+            </li><li>
+                <a href="/posts/" title="posts">posts</a>
+            </li><li>
+                <a href="/whiskey/" title="whiskey">whiskey</a>
+            </li><li>
+                <a href="/looking/" title="looking">looking</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main id="content">
+<article>
+    <header id="post-header">
+        <h1>GitOps &amp; Secrets</h1>
+        <div>
+                <time>January 6, 2024</time>
+            </div>
+    </header><p>So you&rsquo;ve struck out on the GitOps path&hellip; You&rsquo;ve got your application manifests templated out in Helm, they&rsquo;re stored on Github, you&rsquo;ve got ArgoCD facing your repo and an ApplicationSet putting everything together. &ldquo;Ahhhhh&rdquo;, you recline, feet on your desk, &ldquo;this is the sweet life.&rdquo; But something enters your mind. Something feels off. Sure, your pull requests are building ephemeral preview builds to the cluster, but what about the secrets? Up to this point, you had excluded secrets from your deployment templates, simply conceding that once an application is built, someone still has to log on to the cluster console to configure the secrets before the application will run properly. You wouldn&rsquo;t want those precious API keys out on display on GitHub, your database credentials and connection strings out there for all to see&hellip; you need these secrets off your repositories! &ldquo;Damn it all to hell!&rdquo; you say and press the big red button that returns everything to 2-hour long Jenkins builds.</p>
+<p>But wait&hellip; there might be a way around this. Press that other big red button that undoes the first one.</p>
+<h4 id="sealedsecrets">SealedSecrets</h4>
+<p>We can used SealedSecrets to package secrets opaquely. SealedSecrets are a feature of Kubernetes - signed secret objects exclusive to a specific cluster. And if we want to package our secrets alongside our code for dynamic deployment, they do the job nicely.</p>
+<p>In the two-element system made up of a cluster-side operator and a client side utility, a normal Secret.yaml is passed from your local machine to the cluster, which encrypts its contents, and returns to you a SealedSecret object file. This SealedSecret file is only readable by the cluster that signed it - not even you can read it. These SealedSecrets can then be safely stored in plain sight, on a public repository for example, safe in the knowledge that it can be used only by the intended cluster. This is the key for our initial problem - successfully obscuring a secret from local development, all the way through the pipeline, the secret only becoming available to the system intended to run it.</p>
+<h4 id="a-word-on-key-management-software">A Word on Key Management Software</h4>
+<p>In my opinion, considering their apparent simplicity, SealedSecrets accomplish a lot. If we&rsquo;re defining our problem as how to safely package sensitive information for GitOps deployments, they provide an tidy way to do this. But we&rsquo;re still handling credentials manually in the sealing process. If we want to look beyond this, to a future you can be more even more hands off with management of the secrets&rsquo; actual values, implementing or integrating an existing key management platform to your GitOps flow could be the solution. Together, the tools potentiate one another and provide not only a secure way of providing sensitive values to your Helm builds, but secure storage of the values, automatic provisioning and cycling of values where needed, reducing the need for manual handling of secure data. Key Management Software, version control, build tools - can all be considered as sources for these values.</p>
+<h3 id="the-why">The Why</h3>
+<p>There are numerous ways one could implement secret values in a GitOps workflow, but in these posts I&rsquo;d like to concentrate on the <em>why</em> behind particular Dev&amp;GitOps tools, and avoid too much technical detail. There are a few of these options I&rsquo;d like to cover here in the future:</p>
+<ul>
+<li>KMS and Kubernetes CSI Drivers</li>
+<li>Sealing Secrets with CI/CD tools</li>
+<li>Secrets &amp; ArgoCD</li>
+</ul>
+</article>
+
+        </main><footer id="footer">
+    2024
+</footer>
+</body>
+</html>
