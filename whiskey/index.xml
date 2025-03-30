@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Daragh Monaghan</title>
-    <link>http://localhost:1313/whiskey/</link>
+    <link>daraghmonaghan.com/whiskey/</link>
     <description>Recent content on Daragh Monaghan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 30 Mar 2025 16:30:15 +0100</lastBuildDate>
     
-	<atom:link href="http://localhost:1313/whiskey/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="daraghmonaghan.com/whiskey/index.xml" rel="self" type="application/rss+xml" />
     
     
     
@@ -16,10 +16,10 @@
     
     <item>
       <title>KMS &amp; CSI</title>
-      <link>http://localhost:1313/posts/kms_csi/</link>
+      <link>daraghmonaghan.com/posts/kms_csi/</link>
       <pubDate>Thu, 11 Jan 2024 09:03:20 -0800</pubDate>
       
-      <guid>http://localhost:1313/posts/kms_csi/</guid>
+      <guid>daraghmonaghan.com/posts/kms_csi/</guid>
       <description>&lt;p&gt;I won&amp;rsquo;t recommend any one particular KMS but for illustrative purposes, will use Fortanix Data Security Manager here as an example I&amp;rsquo;m familar with, but its safe enough to say this is basic functionality of any key management platform. You can store a variety of forms of sensitive data here and retrieve them using API keys, certs, basic authentication. Fortanix provides a a wide variety of object types, encoding schemes, rotation options and granular access controls.&lt;br&gt;
 OpenShift supports the use of a CSI Driver - a Kubernetes object that interfaces with EKMS to forward specified credentials as secrets within a cluster. There are different levels of security even within this approach - whether you apply your API key within the CSI Driver object, or store it as its own secret in the cluster and refer to that is up to you. Fortanix also supports a two way communication between the platforms, enabling automatic rotation your API key.&lt;/p&gt;
 &lt;p&gt;One other advantage to this approach is that your secrets are kept in one off-system location, distinct from your cluster. Consider whether multiple systems, platforms or services are referring to the same credentials, or require communication of the same security certs. Arguably it gives greater scope for portability. If you see yourself migrating a Kubernetes application off SEBShift and onto GCP in the future, would it be easier to do so if its already connecting to an external service?&lt;/p&gt;
@@ -33,10 +33,10 @@ OpenShift supports the use of a CSI Driver - a Kubernetes object that interfaces
     
     <item>
       <title>The Why</title>
-      <link>http://localhost:1313/posts/the_why/</link>
+      <link>daraghmonaghan.com/posts/the_why/</link>
       <pubDate>Thu, 11 Jan 2024 09:03:20 -0800</pubDate>
       
-      <guid>http://localhost:1313/posts/the_why/</guid>
+      <guid>daraghmonaghan.com/posts/the_why/</guid>
       <description>&lt;p&gt;A theme I have noticed while applying GitOps practices is a lack of &lt;em&gt;justification&lt;/em&gt;. What problem does your recommendation solve? I think this is applicable to a lot of different areas within tech but as I was comparing some tools within the GitOps sphere recently, I was taken aback at how uninformative communication on technical opinions could be.&lt;/p&gt;
 &lt;p&gt;Start searching the keywords &amp;lsquo;helm&amp;rsquo; and &amp;lsquo;secrets&amp;rsquo; and you&amp;rsquo;ll find a lot of context-ignorant Reddit (generally good advice: don&amp;rsquo;t look for advice on Reddit) posts along the lines of: &lt;br&gt;
 &lt;code&gt;&amp;quot;we used sops, now we use kops/skops/mops&amp;quot;&lt;/code&gt;&lt;br&gt;
@@ -52,10 +52,10 @@ OpenShift supports the use of a CSI Driver - a Kubernetes object that interfaces
     
     <item>
       <title>GitOps &amp; Secrets</title>
-      <link>http://localhost:1313/posts/gitops_secrets/</link>
+      <link>daraghmonaghan.com/posts/gitops_secrets/</link>
       <pubDate>Sat, 06 Jan 2024 09:03:20 -0800</pubDate>
       
-      <guid>http://localhost:1313/posts/gitops_secrets/</guid>
+      <guid>daraghmonaghan.com/posts/gitops_secrets/</guid>
       <description>&lt;p&gt;So you&amp;rsquo;ve struck out on the GitOps path&amp;hellip; You&amp;rsquo;ve got your application manifests templated out in Helm, they&amp;rsquo;re stored on Github, you&amp;rsquo;ve got ArgoCD facing your repo and an ApplicationSet putting everything together. &amp;ldquo;Ahhhhh&amp;rdquo;, you recline, feet on your desk, &amp;ldquo;this is the sweet life.&amp;rdquo; But something enters your mind. Something feels off. Sure, your pull requests are building ephemeral preview builds to the cluster, but what about the secrets? Up to this point, you had excluded secrets from your deployment templates, simply conceding that once an application is built, someone still has to log on to the cluster console to configure the secrets before the application will run properly. You wouldn&amp;rsquo;t want those precious API keys out on display on GitHub, your database credentials and connection strings out there for all to see&amp;hellip; you need these secrets off your repositories! &amp;ldquo;Damn it all to hell!&amp;rdquo; you say and press the big red button that returns everything to 2-hour long Jenkins builds.&lt;/p&gt;
 &lt;p&gt;But wait&amp;hellip; there might be a way around this. Press that other big red button that undoes the first one.&lt;/p&gt;
 &lt;h4 id=&#34;sealedsecrets&#34;&gt;SealedSecrets&lt;/h4&gt;
